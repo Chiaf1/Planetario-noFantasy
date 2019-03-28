@@ -1,6 +1,6 @@
 package nofantasy.planetario;
 
-public class CorpoCeleste {
+public abstract class CorpoCeleste {
 	
 	private String nome;
 	private double massa;
