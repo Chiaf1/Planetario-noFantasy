@@ -5,7 +5,7 @@ import java.util.*;
 public class Pianeta extends CorpoCeleste{
 	
 	private String id;
-	private static String newId;
+	private static String newId = "PA0000";
 	ArrayList<Luna> lune = new ArrayList<Luna>();
 	
 	public Pianeta() {
