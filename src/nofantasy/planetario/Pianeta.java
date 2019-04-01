@@ -10,12 +10,12 @@ public class Pianeta extends CorpoCeleste{
 	ArrayList<Luna> lune = new ArrayList<Luna>();
 	
 	public Pianeta() {
-		super("",0.0,0.0,0.0,0.0,0.0);
+		super("",0.0,0.0,0.0,0.0);
 	}
 	
-	public Pianeta(String nome, double massa, double raggio, double periodo, double angolo0, double raggioOrbita) {
+	public Pianeta(String nome, double massa, double periodo, double angolo0, double raggioOrbita) {
 		
-		super(nome, massa, raggio, periodo, angolo0, raggioOrbita);
+		super(nome, massa, periodo, angolo0, raggioOrbita);
 		
 		//creazione id
 		id = newId;
@@ -28,7 +28,7 @@ public class Pianeta extends CorpoCeleste{
 	
 	public boolean aggiungiLuna(Luna newLuna) {
 		for(int i = 0; i<lune.size(); i++) {
-			if (newLuna.getRaggio() == lune.get(i).getRaggio()) {
+			if (newLuna.getRaggioOrbita() == lune.get(i).getRaggioOrbita()) {
 				return false;
 			}				
 		}

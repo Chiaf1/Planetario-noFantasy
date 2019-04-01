@@ -21,7 +21,7 @@ public class InterfacciaUtente {
 	
 	private void aggiungiLuna() {
 		String nomeLuna, nomePianeta;
-		double massa, raggioOrbita, periodo, angolo0, raggio;
+		double massa, raggioOrbita, periodo, angolo0;
 		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza.\n"
 				+ "Dopo di che devi inserire le specifichedella luna.\n");
 		nomeLuna = letturaString("Luna: ");
@@ -30,8 +30,7 @@ public class InterfacciaUtente {
 		raggioOrbita = letturaDouble("\nRaggio orbitale: ");
 		periodo = letturaDouble("\nPeriodo orbitale: ");
 		angolo0 = letturaDouble("\nPeriodo orbitale: ");
-		raggio = letturaDouble("\nRaggio pianeta: ");
-		Luna newLuna = new Luna(nomeLuna, massa, raggio, periodo, angolo0, raggioOrbita);
+		Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita);
 		if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
 			scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
 		}
@@ -59,12 +58,11 @@ public class InterfacciaUtente {
 		
 		String nome = letturaString("Inserire il nome: ");
 		double massa = letturaDouble("Inserire la massa: ");
-		double raggio = letturaDouble("Inserire il raggio del pianeta: ");
 		double periodo = letturaDouble("Inserire il periodo:");
 		double angolo0 = letturaDouble("Inserire l'angolo di partenza: ");
 		double raggioOrbita = letturaDouble("Inserire il raggio dell'orbita: ");
 		
-		newPianeta = new Pianeta(nome, massa, raggio, periodo, angolo0, raggioOrbita);
+		newPianeta = new Pianeta(nome, massa, periodo, angolo0, raggioOrbita);
 		if (!(sistema.getStella().aggiungiPianeta(newPianeta))){
 			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due:"
 					+ "_è stato raggiunto il limite di spazio per i pianeti"
@@ -103,7 +101,7 @@ public class InterfacciaUtente {
 				isEnded = true;
 			} catch (InputMismatchException e) {
 				System.out.println("il valore inserito non è nel formato corretto");
-				String daButtare = lettore.next();
+				lettore.next();
 			}
 		} while (!isEnded);
 		return datoLetto;
