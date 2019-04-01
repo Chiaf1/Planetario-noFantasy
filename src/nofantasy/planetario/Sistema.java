@@ -5,6 +5,8 @@ import java.util.*;
 public class Sistema {
 	
 	
+	//limao
+	
 	private Stella stella = new Stella();
 	private Coordinate centroDiMassa = new Coordinate(0, 0);
 	private ArrayList<String> listaCollisioni = new ArrayList<String>();
