@@ -13,9 +13,9 @@ public class Stella extends CorpoCeleste{
 		super("",0.0,0.0);
 	}
 	
-	public Stella(String nome, double massa, double raggio) {
+	public Stella(String nome, double massa, double raggioOrbita) {
 		
-		super(nome, massa, raggio);
+		super(nome, massa, raggioOrbita);
 		
 		//calcolo Id
 		id = newId;
