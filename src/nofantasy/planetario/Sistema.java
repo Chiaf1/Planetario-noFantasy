@@ -23,7 +23,7 @@ public class Sistema {
 		return centroDiMassa;
 	}
 	
-	public ArrayList<String[]> getListaCollisioni() {
+	public ArrayList<String> getListaCollisioni() {
 		return listaCollisioni;
 	}
 	
@@ -73,16 +73,23 @@ public class Sistema {
 		
 		for ( i = 0; i<stella.getNumeroPianeti(); i++) {
 			
-			for( c = 0; c<stella.getNumeroPianeti(); c++) {
+			for( c = 0; c<stella.getPianeta(i).getNumeroLune(); c++) {
 				
-				for ( d = 0; d<stella.getPianeta(c).getNumeroLune(); d++) {
-					
-					if(i!=c) {
+				for ( d = 0; d<stella.getNumeroPianeti(); d++) {
+					if(i!=d) {
+					for (int e=0; e<stella.getPianeta(c).getNumeroLune(); e++) {
 						
-						if (stella.getPianeta(i).getRaggioOrbita() <= (stella.getPianeta(c).getLuna(d).getRaggioOrbita() + stella.getPianeta(c).getRaggioOrbita()) && stella.getPianeta(i).getRaggioOrbita() >= (stella.getPianeta(c).getLuna(d).getRaggioOrbita() - stella.getPianeta(c).getRaggioOrbita())) {
-							
-							listaCollisioni.add(stella.getPianeta(i).getNome() + ", " + stella.getPianeta(c).getLuna(d).getNome());
-							
+							if ((stella.getPianeta(i).getLuna(c).getRaggioOrbita() + stella.getPianeta(i).getRaggioOrbita()) <= (stella.getPianeta(c).getLuna(d).getRaggioOrbita() + stella.getPianeta(c).getRaggioOrbita()) && (stella.getPianeta(i).getRaggioOrbita() + stella.getPianeta(i).getRaggioOrbita()) >= (stella.getPianeta(c).getLuna(d).getRaggioOrbita() - stella.getPianeta(c).getRaggioOrbita())) {
+								
+								if (((stella.getPianeta(i).getRaggioOrbita() - stella.getPianeta(i).getLuna(c).getRaggioOrbita()) <= (stella.getPianeta(c).getRaggioOrbita() - stella.getPianeta(i).getLuna(c).getRaggioOrbita()) && (stella.getPianeta(i).getRaggioOrbita() + stella.getPianeta(i).getRaggioOrbita()) >= (stella.getPianeta(c).getLuna(d).getRaggioOrbita() - stella.getPianeta(c).getRaggioOrbita()))) {
+									
+									listaCollisioni.add(stella.getPianeta(i).getLuna(c).getNome() + ", " + stella.getPianeta(d).getLuna(e).getNome());
+									
+								}
+								
+								
+							}
+					
 						}
 					}
 					
@@ -237,8 +244,5 @@ public class Sistema {
 		return risultato;
 		
 	}
-
-	private int cerca(){
-		
-	}
+	
 }
