@@ -5,6 +5,7 @@ import java.util.*;
 public class InterfacciaUtente {
 	
 	private Scanner lettore = new Scanner(System.in);
+	private Sistema sistema; 
 	
 	public void creaziioneSistema() {
 		
@@ -19,7 +20,10 @@ public class InterfacciaUtente {
 	}
 	
 	private void aggiungiLuna() {
-		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza\n");
+		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza\n"
+				+ "e la stella corrispondente. Dopo di che devi inserire le specifiche\n"
+				+ "della luna.\n");
+		
 	}
 	
 	private void distruggiLuna() {
