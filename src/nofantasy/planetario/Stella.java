@@ -27,12 +27,19 @@ public class Stella extends CorpoCeleste{
 	}
 	
 	public boolean aggiungiPianeta(Pianeta newPianeta) {
+		for(int i = 0; i<pianeti.size(); i++) {
+			if (newPianeta.getRaggio() == pianeti.get(i).getRaggio()) {
+				return false;
+			}				
+		}
+		
 		if (pianeti.size()<=N_MAX_PIANETI) {
 			pianeti.add(newPianeta);
 			return true;
 		}else {
 			return false;
 		}
+		
 	}
 	
 	public ArrayList<Pianeta> getPianeta(){

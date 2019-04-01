@@ -27,6 +27,12 @@ public class Pianeta extends CorpoCeleste{
 	}
 	
 	public boolean aggiungiLuna(Luna newLuna) {
+		for(int i = 0; i<lune.size(); i++) {
+			if (newLuna.getRaggio() == lune.get(i).getRaggio()) {
+				return false;
+			}				
+		}
+		
 		if (lune.size()<=N_MAX_LUNE) {
 			lune.add(newLuna);
 			return true;
