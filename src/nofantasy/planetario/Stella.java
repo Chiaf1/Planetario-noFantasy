@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Stella extends CorpoCeleste{
 	
+	private static final int N_MAX_PIANETI = 26000;
 	private String id;
 	private static String newId = "SA0000";
 	private ArrayList<Pianeta> pianeti = new ArrayList<Pianeta>();
@@ -25,8 +26,13 @@ public class Stella extends CorpoCeleste{
 		return id;
 	}
 	
-	public void aggiungiPianeta(Pianeta newPianeta) {
-		pianeti.add(newPianeta);
+	public boolean aggiungiPianeta(Pianeta newPianeta) {
+		if (pianeti.size()<=N_MAX_PIANETI) {
+			pianeti.add(newPianeta);
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public ArrayList<Pianeta> getPianeta(){

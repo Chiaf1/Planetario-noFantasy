@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Pianeta extends CorpoCeleste{
 	
+	private static final int N_MAX_LUNE = 5000;
 	private String id;
 	private static String newId = "PA0000";
 	ArrayList<Luna> lune = new ArrayList<Luna>();
@@ -25,8 +26,14 @@ public class Pianeta extends CorpoCeleste{
 		return id;
 	}
 	
-	public void aggiungiLuna(Luna newLuna) {
-		lune.add(newLuna);
+	public boolean aggiungiLuna(Luna newLuna) {
+		if (lune.size()<=N_MAX_LUNE) {
+			lune.add(newLuna);
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 	public ArrayList<Luna> getLuna(){

@@ -28,10 +28,12 @@ public class Sistema {
 	
 	private void centroDiMassa(long tempo) {
 		double massaM = stella.getMassa();
+		
 		double xM = stella.getMassa() * stella.getCoordinate().getX();
 		double yM = stella.getMassa() * stella.getCoordinate().getY();
 		
 		for (int i = 0; i<stella.getNumeroPianeti(); i++) {
+			
 			massaM += stella.getPianeta(i).getMassa();
 			xM += stella.getPianeta(i).getMassa() * stella.getPianeta(i).getCoordinate().getX();
 			yM += stella.getPianeta(i).getMassa() * stella.getPianeta(i).getCoordinate().getY();
