@@ -68,12 +68,14 @@ public class Pianeta extends CorpoCeleste{
 		lune.remove(i);
 	}
 	
-	public void distruggiLuna(String nome) {
+	public boolean distruggiLuna(String nome) {
 		for(int i=0; i<lune.size(); i++) {
 			if(nome == lune.get(i).getNome()) {
 				lune.remove(i);
+				return true;
 			}
 		}
+		return false;
 	}
 
 }

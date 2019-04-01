@@ -20,14 +20,37 @@ public class InterfacciaUtente {
 	}
 	
 	private void aggiungiLuna() {
-		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza\n"
-				+ "e la stella corrispondente. Dopo di che devi inserire le specifiche\n"
-				+ "della luna.\n");
-		
+		String nomeLuna, nomePianeta;
+		double massa, raggioOrbita, periodo, angolo0, raggio;
+		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza.\n"
+				+ "Dopo di che devi inserire le specifichedella luna.\n");
+		nomeLuna = letturaString("Luna: ");
+		nomePianeta = letturaString("\nPianeta: ");
+		massa = letturaDouble("\nMassa: ");
+		raggioOrbita = letturaDouble("\nRaggio orbitale: ");
+		periodo = letturaDouble("\nPeriodo orbitale: ");
+		angolo0 = letturaDouble("\nPeriodo orbitale: ");
+		raggio = letturaDouble("\nRaggio pianeta: ");
+		Luna newLuna = new Luna(nomeLuna, massa, raggio, periodo, angolo0, raggioOrbita);
+		if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
+			scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
+		}
 	}
 	
 	private void distruggiLuna() {
-		
+		String nomeLuna;
+		boolean b = false;
+		scrittura("Per distruggere una luna bisogna sapere il nome.");
+		nomeLuna = letturaString("\nLuna: ");
+		for(int i = 0; i < sistema.getStella().getNumeroPianeti(); i++) {
+			if(sistema.getStella().getPianeta(i).distruggiLuna(nomeLuna)) {
+				b = true;
+				break;
+			}
+		}
+		if (!b) {
+			scrittura("La luna da te cercata non esiste.");
+		}
 	}
 	
 	private void aggiungiPianeta() {
