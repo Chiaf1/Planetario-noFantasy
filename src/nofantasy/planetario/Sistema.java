@@ -247,4 +247,8 @@ public class Sistema {
 		
 	}
 	
+	public Stella getStella() {
+		return stella;
+	}
+	
 }

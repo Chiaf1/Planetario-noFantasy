@@ -19,7 +19,7 @@ public class InterfacciaUtente {
 	}
 	
 	private void aggiungiLuna() {
-		
+		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza\n");
 	}
 	
 	private void distruggiLuna() {
