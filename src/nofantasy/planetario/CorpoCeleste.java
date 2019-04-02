@@ -10,16 +10,11 @@ public abstract class CorpoCeleste {
 	private Coordinate coordinate;
 	
 	public CorpoCeleste(String nome, double massa, double periodo, double angolo0, double raggioOrbita) {
-		
 		this.nome = nome;
 		this.massa = massa;
 		this.periodo = periodo;
 		this.angolo0 = angolo0;
-		this.raggioOrbita = raggioOrbita;
-		
-		//calcolo coordinate
-		coordinate = new Coordinate(raggioOrbita*Math.cos(angolo0), raggioOrbita*Math.sin(angolo0));
-				
+		this.raggioOrbita = raggioOrbita;	
 	}
 	
 	public CorpoCeleste(String nome, double massa) {

@@ -7,7 +7,7 @@ public class Pianeta extends CorpoCeleste{
 	private static final int N_MAX_LUNE = 5000;
 	private String id;
 	private static String newId = "PA0000";
-	ArrayList<Luna> lune = new ArrayList<Luna>();
+	private ArrayList<Luna> lune = new ArrayList<Luna>();
 	
 	public Pianeta() {
 		super("",0.0,0.0,0.0,0.0);
@@ -20,6 +20,10 @@ public class Pianeta extends CorpoCeleste{
 		//creazione id
 		id = newId;
 		newId = super.calcolaId(newId);
+		
+		//calcolo coordinate
+		Coordinate coordinate = new Coordinate(raggioOrbita*Math.cos(angolo0), raggioOrbita*Math.sin(angolo0));
+		super.setCoordinate(coordinate);
 	}
 	
 	public String getId() {
@@ -33,7 +37,7 @@ public class Pianeta extends CorpoCeleste{
 			}				
 		}
 		
-		if (lune.size()<=N_MAX_LUNE) {
+		if (lune.size() <= N_MAX_LUNE) {
 			lune.add(newLuna);
 			return true;
 		}else {
@@ -52,7 +56,7 @@ public class Pianeta extends CorpoCeleste{
 	
 	public Luna getLuna(String nome) {
 		for(int i=0; i<lune.size(); i++) {
-			if(nome == lune.get(i).getNome()) {
+			if(nome.equals(lune.get(i).getNome())) {
 				return lune.get(i);
 			}
 		}
@@ -70,7 +74,7 @@ public class Pianeta extends CorpoCeleste{
 	
 	public boolean distruggiLuna(String nome) {
 		for(int i=0; i<lune.size(); i++) {
-			if(nome == lune.get(i).getNome()) {
+			if(nome.equals(lune.get(i).getNome())) {
 				lune.remove(i);
 				return true;
 			}

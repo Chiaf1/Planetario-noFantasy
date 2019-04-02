@@ -25,7 +25,9 @@ public class InterfacciaUtente {
 				+ "_a: aggiungi corpo\n"
 				+ "_d: distruggi corpo\n"
 				+ "_c: calcolo della rotta\n"
-				+ "_e: chiudi il programma")) {
+				+ "_e: chiudi il programma\n"
+				+ "_m: per ricevere i dati sul centro di massa\n"
+				+ "_n: per avere i dati sulle collisioni\n")) {
 		case 's':
 			ricercaCorpo(letturaString("Inserire il nome del corpo da cercare: "));
 			break;
@@ -47,7 +49,7 @@ public class InterfacciaUtente {
 		case 'd':
 			switch(letturaChar("Specfica la tipologia del corpo da distruggere\n"
 					+ "_p: per distruggere un pianeta\n"
-					+ "_l: per distruggere una luna")) {
+					+ "_l: per distruggere una luna\n")) {
 			case 'p':
 				distruggiPianeta();
 				break;
@@ -59,23 +61,42 @@ public class InterfacciaUtente {
 		case 'c':
 			calcoloRotta();
 			break;
+		case 'm':
+			calcoloCentroDiMassa();
+			break;
+		case 'n':
+			calcoloCollisioni();
+			break;
 		case 'e':
 			return true;
 		}
 		return false;
 	}
+	
+	private void calcoloCentroDiMassa() {
+		sistema.centroDiMassa();
+		scrittura("Il centro di massa si trova:\n" + "(" + sistema.getCentroDiMassa().getX() + "," + sistema.getCentroDiMassa().getY() + ")");
+	}
+	
+	private void calcoloCollisioni() {
+		sistema.collisioni();
+		
+		for (int i = 0; i<sistema.getListaCollisioni().size(); i++) {
+			scrittura(sistema.getListaCollisioni().get(i));
+		}
+	}
 
 	private void ricercaCorpo(String nomeCorpo) {	
-		if(nomeCorpo == sistema.getStella().getNome()) {
+		if(nomeCorpo.equals(sistema.getStella().getNome())) {
 			scrittura(nomeCorpo + " esiste ed è la stella del sistema");
 		}else {
 			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
-				if(nomeCorpo == sistema.getStella().getPianeta(i).getNome()) {
+				if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getNome())) {
 					scrittura(nomeCorpo + " esiste ed è un pianeta che orbita attorno a " + sistema.getStella().getNome());
 					break;
 				}else {
 					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
-						if(nomeCorpo == sistema.getStella().getPianeta(i).getLuna(c).getNome()) {
+						if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getLuna(c).getNome())) {
 							scrittura(nomeCorpo + " esiste ed è una luna di " + sistema.getStella().getPianeta(i).getNome());
 							break;
 						}						
@@ -87,12 +108,12 @@ public class InterfacciaUtente {
 	}
 	
 	private void visualizzazioneInfo(String nomeCorpo) {
-		if(nomeCorpo == sistema.getStella().getNome()) {
+		if(nomeCorpo.equals(sistema.getStella().getNome())) {
 			scrittura(nomeCorpo + " è una stella, ecco i suoi dati: ");
 			stampaDati(sistema.getStella(), true);
 		}else {
 			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
-				if(nomeCorpo == sistema.getStella().getPianeta(i).getNome()) {
+				if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getNome())) {
 					scrittura(nomeCorpo + " è un pianeta, ecco i suoi dati: ");
 					stampaDati(sistema.getStella().getPianeta(i), false);
 					for (Luna elemento : sistema.getStella().getPianeta(i).getLuna()) {
@@ -101,7 +122,7 @@ public class InterfacciaUtente {
 					break;
 				}else {
 					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
-						if(nomeCorpo == sistema.getStella().getPianeta(i).getLuna(c).getNome()) {
+						if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getLuna(c).getNome())) {
 							scrittura(nomeCorpo + " è una luna, ecco i suoi dati: ");
 							stampaDati(sistema.getStella().getPianeta(i).getLuna(c), false);
 							scrittura("il percorso per trovare la luna è: ");
@@ -126,16 +147,16 @@ public class InterfacciaUtente {
 		massa = letturaDouble("Massa: ");
 		raggioOrbita = letturaDouble("Raggio orbitale: ");
 		periodo = letturaDouble("Periodo orbitale: ");
-		angolo0 = letturaDouble("Periodo orbitale: ");
-		Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita);
-		
+		angolo0 = letturaDouble("Angolo di partenza: ");
+
 		for (int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
-			if (nomePianeta == sistema.getStella().getPianeta(i).getNome()) {
+			if (nomePianeta.equals(sistema.getStella().getPianeta(i).getNome())) {
+				Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita, sistema.getStella().getPianeta(i));
 				if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
 					scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
-					isTrovato = true;
-					break;
 				}
+				isTrovato = true;
+				break;
 			}
 		}
 		if (!isTrovato) {

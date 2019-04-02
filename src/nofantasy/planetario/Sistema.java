@@ -12,12 +12,6 @@ public class Sistema {
 		this.stella = stella;
 	}
 	
-	public void aggiorna(long tempo) {
-		centroDiMassa(tempo);
-		
-		collisioni();
-	}
-	
 	public Coordinate getCentroDiMassa() {
 		return centroDiMassa;
 	}
@@ -26,7 +20,7 @@ public class Sistema {
 		return listaCollisioni;
 	}
 	
-	private void centroDiMassa(long tempo) {
+	public void centroDiMassa() {
 		double massaM = stella.getMassa();
 		
 		double xM = stella.getMassa() * stella.getCoordinate().getX();
@@ -49,7 +43,7 @@ public class Sistema {
 		centroDiMassa.setY(yM/massaM);
 	}
 	
-	private void collisioni() {
+	public void collisioni() {
 		int i,c,d;
 		for ( i = 0; i<stella.getNumeroPianeti(); i++) {
 			
@@ -125,20 +119,20 @@ public class Sistema {
 		int i,c;
 		
 		//ricerca del corpo 1, mi salvo solo l'id per poter risalire più velocemente al tipo di corpo celeste dopo qunado faccio il calcolo della rotta
-		if(nomeCorpo1 == stella.getNome()) {
+		if(nomeCorpo1.contentEquals(stella.getNome())) {
 			idCorpo1 = stella.getId();
 		}else {
 			for( i = 0; i == stella.getNumeroPianeti(); i++) {
 				//mi salvo l'indice del pianeta
 				indicePianeta1 = i;
-				if(nomeCorpo1 == stella.getPianeta(i).getNome()) {
+				if(nomeCorpo1.contentEquals(stella.getPianeta(i).getNome())) {
 					idCorpo1 = stella.getPianeta(i).getId();
 					break;
 				}else {
 					for( c = 0; c == stella.getPianeta(i).getNumeroLune(); c++) {
 						//come prima, mi salvo l'indice della luna
 						indiceLuna1 = c;
-						if(nomeCorpo1 == stella.getPianeta(i).getLuna(c).getNome()) {
+						if(nomeCorpo1.equals(stella.getPianeta(i).getLuna(c).getNome())) {
 							idCorpo1 = stella.getPianeta(i).getLuna(c).getId();
 							break;
 						}						
@@ -148,20 +142,20 @@ public class Sistema {
 		}
 
 		//ricerca del corpo 2, mi salvo solo l'id per poter risalire più velocemente al tipo di corpo celeste dopo qunado faccio il calcolo della rotta
-		if(nomeCorpo2 == stella.getNome()) {
+		if(nomeCorpo2.contentEquals(stella.getNome())) {
 			idCorpo2 = stella.getId();
 		}else {
 			for( i = 0; i == stella.getNumeroPianeti(); i++) {
 				//mi salvo l'indice del pianeta
 				indicePianeta2 = i;
-				if(nomeCorpo2 == stella.getPianeta(i).getNome()) {
+				if(nomeCorpo2.equals(stella.getPianeta(i).getNome())) {
 					idCorpo2 = stella.getPianeta(i).getId();
 					break;
 				}else {
 					for( c = 0; c == stella.getPianeta(i).getNumeroLune(); c++) {
 						//come prima, mi salvo l'indice della luna
 						indiceLuna2 = c;
-						if(nomeCorpo2 == stella.getPianeta(i).getLuna(c).getNome()) {
+						if(nomeCorpo2.equals(stella.getPianeta(i).getLuna(c).getNome())) {
 							idCorpo2 = stella.getPianeta(i).getLuna(c).getId();
 							break;
 						}						

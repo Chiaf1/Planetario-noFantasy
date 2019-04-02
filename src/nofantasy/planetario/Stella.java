@@ -52,7 +52,7 @@ public class Stella extends CorpoCeleste{
 	
 	public Pianeta getPianeta(String nome) {
 		for(int i=0; i<pianeti.size(); i++) {
-			if(nome == pianeti.get(i).getNome()) {
+			if(nome.equals(pianeti.get(i).getNome())) {
 				return pianeti.get(i);
 			}
 		}
@@ -70,7 +70,7 @@ public class Stella extends CorpoCeleste{
 	
 	public boolean distruggiPianeta(String nome) {
 		for(int i=0; i<pianeti.size(); i++) {
-			if(nome == pianeti.get(i).getNome()) {
+			if(nome.equals(pianeti.get(i).getNome())) {
 				pianeti.remove(i);
 				return true;
 			}
