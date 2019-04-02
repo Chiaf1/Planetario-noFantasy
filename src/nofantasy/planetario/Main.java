@@ -1,10 +1,17 @@
 package nofantasy.planetario;
 
 public class Main {
+	
+	private static InterfacciaUtente interfaccia = new InterfacciaUtente();
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		interfaccia.creaziioneSistema();
+		
+		while(true) {
+			if(interfaccia.azione()) {
+				break;
+			}
+		}
 	}
 
 }
