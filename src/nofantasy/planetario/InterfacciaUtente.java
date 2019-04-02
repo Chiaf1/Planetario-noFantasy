@@ -13,6 +13,25 @@ public class InterfacciaUtente {
 	
 	public void azione() {
 		
+		switch(letturaChar("Menu\n"
+				+ "_s: ricerca corpo\n"
+				+ "_i: visualizza informazioni corpo\n"
+				+ "_a: aggiungi corpo\n"
+				+ "_d: distruggi corpo\n")) {
+		case 's':
+			
+			break;
+		case 'i':
+			
+			break;
+		case 'a':
+			
+			break;
+		case 'd':
+			
+			break;		
+		}
+		
 	}
 
 	private void ricercaCorpo(String nomeCorpo) {	
@@ -33,7 +52,6 @@ public class InterfacciaUtente {
 				}			
 			}			
 		}
-		
 		scrittura("il corpo non è stato all'interno del sistema");
 	}
 	
