@@ -69,6 +69,9 @@ public class InterfacciaUtente {
 			break;
 		case 'e':
 			return true;
+		default: 
+			scrittura("hai sbagliato ad inserire");
+			break;
 		}
 		return false;
 	}
@@ -240,7 +243,7 @@ public class InterfacciaUtente {
 		boolean isEnded = false;
 		char datoLetto = '\0';
 		do {
-			System.out.print(msg);
+			System.out.println(msg);
 			String lettura = lettore.next();
 			if (lettura.length() > 0) {
 				datoLetto = lettura.charAt(0);
