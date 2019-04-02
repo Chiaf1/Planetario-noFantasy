@@ -11,12 +11,59 @@ public class InterfacciaUtente {
 		
 	}
 	
-	public void aggiornaDati() {
-		
-	}
-	
 	public void azione() {
 		
+	}
+
+	private void ricercaCorpo(String nomeCorpo) {	
+		if(nomeCorpo == sistema.getStella().getNome()) {
+			scrittura(nomeCorpo + " esiste ed è la stella del sistema");
+		}else {
+			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
+				if(nomeCorpo == sistema.getStella().getPianeta(i).getNome()) {
+					scrittura(nomeCorpo + " esiste ed è un pianeta che orbita attorno a " + sistema.getStella().getNome());
+					break;
+				}else {
+					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
+						if(nomeCorpo == sistema.getStella().getPianeta(i).getLuna(c).getNome()) {
+							scrittura(nomeCorpo + " esiste ed è una luna di " + sistema.getStella().getPianeta(i).getNome());
+							break;
+						}						
+					}
+				}			
+			}			
+		}
+		
+		scrittura("il corpo non è stato all'interno del sistema");
+	}
+	
+	private void visualizzazioneInfo(String nomeCorpo) {
+		if(nomeCorpo == sistema.getStella().getNome()) {
+			scrittura(nomeCorpo + " è una stella, ecco i suoi dati: ");
+			stampaDati(sistema.getStella(), true);
+		}else {
+			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
+				if(nomeCorpo == sistema.getStella().getPianeta(i).getNome()) {
+					scrittura(nomeCorpo + " è un pianeta, ecco i suoi dati: ");
+					stampaDati(sistema.getStella().getPianeta(i), false);
+					for (Luna elemento : sistema.getStella().getPianeta(i).getLuna()) {
+						scrittura(elemento.getNome());
+					}
+					break;
+				}else {
+					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
+						if(nomeCorpo == sistema.getStella().getPianeta(i).getLuna(c).getNome()) {
+							scrittura(nomeCorpo + " è una luna, ecco i suoi dati: ");
+							stampaDati(sistema.getStella().getPianeta(i).getLuna(c), false);
+							scrittura("il percorso per trovare la luna è: ");
+							scrittura(sistema.getStella().getNome() + ">" + sistema.getStella().getPianeta(i) + ">" + sistema.getStella().getPianeta(i).getLuna(c).getNome());
+							break;
+						}						
+					}
+				}			
+			}			
+		}		
+		scrittura("il corpo non è stato trovato all'interno del sistema");
 	}
 	
 	private void aggiungiLuna() {
@@ -25,11 +72,11 @@ public class InterfacciaUtente {
 		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza.\n"
 				+ "Dopo di che devi inserire le specifichedella luna.\n");
 		nomeLuna = letturaString("Luna: ");
-		nomePianeta = letturaString("\nPianeta: ");
-		massa = letturaDouble("\nMassa: ");
-		raggioOrbita = letturaDouble("\nRaggio orbitale: ");
-		periodo = letturaDouble("\nPeriodo orbitale: ");
-		angolo0 = letturaDouble("\nPeriodo orbitale: ");
+		nomePianeta = letturaString("Pianeta: ");
+		massa = letturaDouble("Massa: ");
+		raggioOrbita = letturaDouble("Raggio orbitale: ");
+		periodo = letturaDouble("Periodo orbitale: ");
+		angolo0 = letturaDouble("Periodo orbitale: ");
 		Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita);
 		if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
 			scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
@@ -64,8 +111,8 @@ public class InterfacciaUtente {
 		
 		newPianeta = new Pianeta(nome, massa, periodo, angolo0, raggioOrbita);
 		if (!(sistema.getStella().aggiungiPianeta(newPianeta))){
-			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due:"
-					+ "_è stato raggiunto il limite di spazio per i pianeti"
+			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due: \n"
+					+ "_è stato raggiunto il limite di spazio per i pianeti\n"
 					+ "_è stato inserito un pianeta con il raggio dell'orbita uguale ad un pianeta già esistente");
 		}
 	}
@@ -86,11 +133,7 @@ public class InterfacciaUtente {
 		
 		System.out.println(sistema.calcoloRotta(corpoDiPartenza, corpoDiArrivo));
 	}
-	
-	private void visualizzazioneInfo() {
-		
-	}
-	
+
 	private double letturaDouble(String msg) {
 		boolean isEnded = false;
 		double datoLetto = 0;
@@ -130,6 +173,17 @@ public class InterfacciaUtente {
 	
 	private void scrittura(String ms) {
 		System.out.println(ms);
+	}
+	
+	private void stampaDati(CorpoCeleste corpo, boolean isStella) {
+		scrittura("_nome: " + corpo.getNome());
+		scrittura("_massa: " + corpo.getMassa());
+		if(!isStella) {
+			scrittura("_raggio dell' orbita: " + corpo.getRaggioOrbita());
+			scrittura("_periodo: " + corpo.getPeriodo());
+			scrittura("_angolo di partenza: " + corpo.getAngolo0());
+		}
+		scrittura("_coordinate: (" + corpo.getCoordinate().getX() + "," + corpo.getCoordinate().getY() + ")");		
 	}
 
 }
