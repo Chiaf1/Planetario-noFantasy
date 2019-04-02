@@ -8,15 +8,24 @@ public class InterfacciaUtente {
 	private Sistema sistema; 
 	
 	public void creaziioneSistema() {
+		scrittura("Benvenuti Nel Sistema Di Gestione Del Vostro Sistema.\n"
+				+ "Per iniziare vi chiediamo di inserire i dati della stella.");
 		
+		String nome = letturaString("Inserire il nome della stella: ");
+		double massa = letturaDouble("Inserire la massa della stella: ");
+		
+		Stella stella = new Stella(nome, massa);
+		sistema = new Sistema(stella);
 	}
-	
-	public void azione() {
+	//da correggere l'aggiunta della luna
+	public boolean azione() {
 		switch(letturaChar("Menu\n"
 				+ "_s: ricerca corpo\n"
 				+ "_i: visualizza informazioni corpo\n"
 				+ "_a: aggiungi corpo\n"
-				+ "_d: distruggi corpo\n")) {
+				+ "_d: distruggi corpo\n"
+				+ "_c: calcolo della rotta\n"
+				+ "_e: chiudi il programma")) {
 		case 's':
 			ricercaCorpo(letturaString("Inserire il nome del corpo da cercare: "));
 			break;
@@ -46,8 +55,14 @@ public class InterfacciaUtente {
 				distruggiLuna();
 				break;
 			}
-			break;		
+			break;
+		case 'c':
+			calcoloRotta();
+			break;
+		case 'e':
+			return true;
 		}
+		return false;
 	}
 
 	private void ricercaCorpo(String nomeCorpo) {	

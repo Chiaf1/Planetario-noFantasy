@@ -22,11 +22,10 @@ public abstract class CorpoCeleste {
 				
 	}
 	
-	public CorpoCeleste(String nome, double massa, double raggioOrbita) {
+	public CorpoCeleste(String nome, double massa) {
 		
 		this.nome = nome;
 		this.massa = massa;
-		this.raggioOrbita = raggioOrbita;
 		
 		coordinate = new Coordinate(0, 0);
 		
