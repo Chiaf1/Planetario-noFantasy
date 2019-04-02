@@ -17,7 +17,7 @@ public class InterfacciaUtente {
 		Stella stella = new Stella(nome, massa);
 		sistema = new Sistema(stella);
 	}
-	//da correggere l'aggiunta della luna
+	
 	public boolean azione() {
 		switch(letturaChar("Menu\n"
 				+ "_s: ricerca corpo\n"
@@ -117,6 +117,7 @@ public class InterfacciaUtente {
 	
 	private void aggiungiLuna() {
 		String nomeLuna, nomePianeta;
+		boolean isTrovato = false;
 		double massa, raggioOrbita, periodo, angolo0;
 		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza.\n"
 				+ "Dopo di che devi inserire le specifichedella luna.\n");
@@ -127,9 +128,19 @@ public class InterfacciaUtente {
 		periodo = letturaDouble("Periodo orbitale: ");
 		angolo0 = letturaDouble("Periodo orbitale: ");
 		Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita);
-		if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
-			scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
+		
+		for (int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
+			if (nomePianeta == sistema.getStella().getPianeta(i).getNome()) {
+				if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
+					scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
+					isTrovato = true;
+					break;
+				}
+			}
 		}
+		if (!isTrovato) {
+			scrittura("Non è stato possibile aggiungere la luna perché il pianeta selezionato non esiste");
+		}		
 	}
 	
 	private void distruggiLuna() {

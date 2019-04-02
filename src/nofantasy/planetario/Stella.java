@@ -10,7 +10,7 @@ public class Stella extends CorpoCeleste{
 	private ArrayList<Pianeta> pianeti = new ArrayList<Pianeta>();
 	
 	public Stella() {
-		super("",0.0,0.0);
+		super("",0.0);
 	}
 	
 	public Stella(String nome, double massa) {
