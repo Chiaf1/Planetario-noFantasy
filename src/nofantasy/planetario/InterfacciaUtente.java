@@ -12,26 +12,42 @@ public class InterfacciaUtente {
 	}
 	
 	public void azione() {
-		
 		switch(letturaChar("Menu\n"
 				+ "_s: ricerca corpo\n"
 				+ "_i: visualizza informazioni corpo\n"
 				+ "_a: aggiungi corpo\n"
 				+ "_d: distruggi corpo\n")) {
 		case 's':
-			
+			ricercaCorpo(letturaString("Inserire il nome del corpo da cercare: "));
 			break;
 		case 'i':
-			
+			visualizzazioneInfo(letturaString("Inserire il nome del corpo di cui si vogliono sapere le informazioni: "));
 			break;
 		case 'a':
-			
+			switch(letturaChar("Specfica la tipologia del corpo da aggiungere\n"
+					+ "_p: per aggiungere un pianeta\n"
+					+ "_l: per aggiungere una luna")) {
+			case 'p':
+				aggiungiPianeta();
+				break;
+			case 'l':
+				aggiungiLuna();
+				break;
+			}
 			break;
 		case 'd':
-			
+			switch(letturaChar("Specfica la tipologia del corpo da distruggere\n"
+					+ "_p: per distruggere un pianeta\n"
+					+ "_l: per distruggere una luna")) {
+			case 'p':
+				distruggiPianeta();
+				break;
+			case 'l':
+				distruggiLuna();
+				break;
+			}
 			break;		
 		}
-		
 	}
 
 	private void ricercaCorpo(String nomeCorpo) {	
