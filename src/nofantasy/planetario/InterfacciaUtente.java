@@ -118,6 +118,14 @@ public class InterfacciaUtente {
 		if(nomeCorpo.equals(sistema.getStella().getNome())) {
 			scrittura(nomeCorpo + " è una stella, ecco i suoi dati: ");
 			stampaDati(sistema.getStella(), true);
+			if (sistema.getStella().getNumeroPianeti() >= 1) {
+				scrittura("I pianeti della stella sono:");
+				for (Pianeta elemento : sistema.getStella().getPianeta()) {
+					scrittura("*" + elemento.getNome());
+				}
+			}else {
+				scrittura("La stella non ha pianeti");
+			}
 			return;
 		}else {
 			for(int i = 0; i < sistema.getStella().getNumeroPianeti(); i++) {
@@ -160,12 +168,34 @@ public class InterfacciaUtente {
 		massa = letturaDouble("Massa: ");
 		raggioOrbita = letturaDouble("Raggio orbitale: ");
 		angolo0 = letturaDouble("Angolo di partenza: ");
-
+		
+		if (sistema.getStella().getNome().equals(nomeLuna)) {
+			scrittura("Il nome inserito esiste già. Cambiarlo tu devi.");
+			return;
+		}else {
+			for(int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
+				if (nomeLuna.equals(sistema.getStella().getPianeta(i).getNome())) {
+					scrittura("Il nome inserito esiste già. Cambiarlo tu devi.");
+					return;
+				}
+				for(int c = 0; c<sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
+					if (nomeLuna.equals(sistema.getStella().getPianeta(i).getLuna(c).getNome())) {
+						scrittura("Il nome inserito esiste già. Cambiarlo tu devi.");
+						return;
+					}
+					if (raggioOrbita == sistema.getStella().getPianeta(i).getLuna(c).getRaggioOrbita()) {
+						scrittura("Il nome inserito esiste già. Cambiarlo tu devi.");
+						return;
+					}
+				}
+			}
+		}
+		
 		for (int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
 			if (nomePianeta.equals(sistema.getStella().getPianeta(i).getNome())) {
 				Luna newLuna = new Luna(nomeLuna, massa, angolo0, raggioOrbita, sistema.getStella().getPianeta(i));
 				if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
-					scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
+					scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale/nome");
 				}
 				isTrovato = true;
 				break;
@@ -205,7 +235,7 @@ public class InterfacciaUtente {
 		if (!(sistema.getStella().aggiungiPianeta(newPianeta))){
 			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due: \n"
 					+ "_è stato raggiunto il limite di spazio per i pianeti\n"
-					+ "_è stato inserito un pianeta con il raggio dell'orbita uguale ad un pianeta già esistente");
+					+ "_è stato inserito un pianeta con il raggio dell'orbita o il nome uguale ad un pianeta già esistente");
 		}
 	}
 	
