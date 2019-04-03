@@ -117,46 +117,51 @@ public class Sistema {
 		int indiceLuna2 = 0;
 		
 		int i,c;
+		boolean isTrovato = false;
 		
 		//ricerca del corpo 1, mi salvo solo l'id per poter risalire più velocemente al tipo di corpo celeste dopo qunado faccio il calcolo della rotta
-		if(nomeCorpo1.contentEquals(stella.getNome())) {
+		if(nomeCorpo1.equals(stella.getNome())) {
 			idCorpo1 = stella.getId();
 		}else {
-			for( i = 0; i == stella.getNumeroPianeti(); i++) {
+			for( i = 0; i < stella.getNumeroPianeti(); i++) {
 				//mi salvo l'indice del pianeta
+				if (isTrovato) break;
 				indicePianeta1 = i;
-				if(nomeCorpo1.contentEquals(stella.getPianeta(i).getNome())) {
+				if(nomeCorpo1.equals(stella.getPianeta(i).getNome())) {
 					idCorpo1 = stella.getPianeta(i).getId();
 					break;
 				}else {
-					for( c = 0; c == stella.getPianeta(i).getNumeroLune(); c++) {
+					for( c = 0; c < stella.getPianeta(i).getNumeroLune(); c++) {
 						//come prima, mi salvo l'indice della luna
 						indiceLuna1 = c;
 						if(nomeCorpo1.equals(stella.getPianeta(i).getLuna(c).getNome())) {
 							idCorpo1 = stella.getPianeta(i).getLuna(c).getId();
+							isTrovato = true;
 							break;
 						}						
 					}
 				}			
 			}			
 		}
-
+		isTrovato = false;
 		//ricerca del corpo 2, mi salvo solo l'id per poter risalire più velocemente al tipo di corpo celeste dopo qunado faccio il calcolo della rotta
-		if(nomeCorpo2.contentEquals(stella.getNome())) {
+		if(nomeCorpo2.equals(stella.getNome())) {
 			idCorpo2 = stella.getId();
 		}else {
-			for( i = 0; i == stella.getNumeroPianeti(); i++) {
+			for( i = 0; i < stella.getNumeroPianeti(); i++) {
 				//mi salvo l'indice del pianeta
+				if (isTrovato) break;
 				indicePianeta2 = i;
 				if(nomeCorpo2.equals(stella.getPianeta(i).getNome())) {
 					idCorpo2 = stella.getPianeta(i).getId();
 					break;
 				}else {
-					for( c = 0; c == stella.getPianeta(i).getNumeroLune(); c++) {
+					for( c = 0; c < stella.getPianeta(i).getNumeroLune(); c++) {
 						//come prima, mi salvo l'indice della luna
 						indiceLuna2 = c;
 						if(nomeCorpo2.equals(stella.getPianeta(i).getLuna(c).getNome())) {
 							idCorpo2 = stella.getPianeta(i).getLuna(c).getId();
+							isTrovato = true;
 							break;
 						}						
 					}
@@ -173,57 +178,57 @@ public class Sistema {
 			
 			if (!idCorpo1.equals(idCorpo2)) {
 				//nel caso in cui i due corpi esistono e sono diversi stampo la rotta e la distanza a seconda della loro combinazione
-				risultato.append("La rotta da seguire per andare da " + nomeCorpo1 + " a " + nomeCorpo2 + " è:");
-				switch (idCorpo1.substring(0, 1).toCharArray()[0]) {
+				risultato.append("La rotta da seguire per andare da " + nomeCorpo1 + " a " + nomeCorpo2 + " è: ");
+				switch (idCorpo1.toCharArray()[0]) {
 				case 'S':
-					switch(idCorpo2.substring(0, 1).toCharArray()[0]) {
+					switch(idCorpo2.toCharArray()[0]) {
 					case 'P'://caso stella>pianeta
 						risultato.append(stella.getNome() + " > " + stella.getPianeta(indicePianeta2).getNome());
 						distanza = stella.getCoordinate().distanza(stella.getPianeta(indicePianeta2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;
 					case 'L'://caso stella>luna
 						risultato.append(stella.getNome() + " > " + stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getNome());
 						distanza = stella.getCoordinate().distanza(stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;				
 					}				
 					break;
 				case 'P':
-					switch(idCorpo2.substring(0, 1).toCharArray()[0]) {
+					switch(idCorpo2.toCharArray()[0]) {
 					case 'S'://caso pianeta>stella
 						risultato.append(stella.getPianeta(indicePianeta1).getNome() + " > " + stella.getNome());
 						distanza = stella.getPianeta(indicePianeta1).getCoordinate().distanza(stella.getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;
 					case 'P'://caso pianeta>stella>pianeta
 						risultato.append(stella.getPianeta(indicePianeta1).getNome() + " > " + stella.getNome() + " > " + stella.getPianeta(indicePianeta2).getNome());
 						distanza = stella.getPianeta(indicePianeta1).getCoordinate().distanza(stella.getCoordinate()) + stella.getCoordinate().distanza(stella.getPianeta(indicePianeta2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;
 					case 'L'://caso pianeta>luna
 						risultato.append(stella.getPianeta(indicePianeta1).getNome() + " > " + stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getNome());
 						distanza = stella.getPianeta(indicePianeta1).getCoordinate().distanza(stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;				
 					}				
 					break;
 				case 'L':
-					switch(idCorpo2.substring(0, 1).toCharArray()[0]) {
+					switch(idCorpo2.toCharArray()[0]) {
 					case 'S'://caso luna>stella
 						risultato.append(stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getNome() + " > " + stella.getNome());
 						distanza = stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getCoordinate().distanza(stella.getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;
 					case 'P'://caso luna>pianeta
 						risultato.append(stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getNome() + " > " + stella.getPianeta(indicePianeta2).getNome());
 						distanza = stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getCoordinate().distanza(stella.getPianeta(indicePianeta2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
-						break;
+						risultato.append(" la distanza da percorrere è: " + distanza);
+						break; 
 					case 'L'://caso luna>pianeta>luna
 						risultato.append(stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getNome() + " > " + stella.getPianeta(indicePianeta1).getNome() + " > " + stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getNome());
 						distanza = stella.getPianeta(indicePianeta1).getLuna(indiceLuna1).getCoordinate().distanza(stella.getPianeta(indicePianeta1).getCoordinate()) + stella.getPianeta(indiceLuna1).getCoordinate().distanza(stella.getPianeta(indicePianeta2).getLuna(indiceLuna2).getCoordinate());
-						risultato.append("la distanza da percorrere è: " + distanza);
+						risultato.append(" la distanza da percorrere è: " + distanza);
 						break;				
 					}				
 					break;			

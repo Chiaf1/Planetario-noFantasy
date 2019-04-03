@@ -19,15 +19,15 @@ public class InterfacciaUtente {
 	}
 	
 	public boolean azione() {
-		switch(letturaChar("Menu\n"
+		switch(letturaChar("\nMenu\n"
 				+ "_s: ricerca corpo\n"
 				+ "_i: visualizza informazioni corpo\n"
 				+ "_a: aggiungi corpo\n"
 				+ "_d: distruggi corpo\n"
 				+ "_c: calcolo della rotta\n"
-				+ "_e: chiudi il programma\n"
 				+ "_m: per ricevere i dati sul centro di massa\n"
-				+ "_n: per avere i dati sulle collisioni")) {
+				+ "_n: per avere i dati sulle collisioni\n"
+				+ "_e: chiudi il programma")) {
 		case 's':
 			ricercaCorpo(letturaString("Inserire il nome del corpo da cercare: "));
 			break;
@@ -83,25 +83,29 @@ public class InterfacciaUtente {
 	
 	private void calcoloCollisioni() {
 		sistema.collisioni();
-		
-		for (int i = 0; i<sistema.getListaCollisioni().size(); i++) {
-			scrittura(sistema.getListaCollisioni().get(i));
+		if (sistema.getListaCollisioni().size()>=1) {
+			for (int i = 0; i<sistema.getListaCollisioni().size(); i++) {
+				scrittura(sistema.getListaCollisioni().get(i));
+			}
+		}else {
+			scrittura("Non vi sono collisioni all'interno del sistema.");
 		}
 	}
 
 	private void ricercaCorpo(String nomeCorpo) {	
 		if(nomeCorpo.equals(sistema.getStella().getNome())) {
 			scrittura(nomeCorpo + " esiste ed è la stella del sistema");
+			return;
 		}else {
-			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
+			for(int i = 0; i < sistema.getStella().getNumeroPianeti(); i++) {
 				if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getNome())) {
 					scrittura(nomeCorpo + " esiste ed è un pianeta che orbita attorno a " + sistema.getStella().getNome());
-					break;
+					return;
 				}else {
-					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
+					for(int c = 0; c < sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
 						if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getLuna(c).getNome())) {
 							scrittura(nomeCorpo + " esiste ed è una luna di " + sistema.getStella().getPianeta(i).getNome());
-							break;
+							return;
 						}						
 					}
 				}			
@@ -114,23 +118,29 @@ public class InterfacciaUtente {
 		if(nomeCorpo.equals(sistema.getStella().getNome())) {
 			scrittura(nomeCorpo + " è una stella, ecco i suoi dati: ");
 			stampaDati(sistema.getStella(), true);
+			return;
 		}else {
-			for(int i = 0; i == sistema.getStella().getNumeroPianeti(); i++) {
+			for(int i = 0; i < sistema.getStella().getNumeroPianeti(); i++) {
 				if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getNome())) {
 					scrittura(nomeCorpo + " è un pianeta, ecco i suoi dati: ");
 					stampaDati(sistema.getStella().getPianeta(i), false);
-					for (Luna elemento : sistema.getStella().getPianeta(i).getLuna()) {
-						scrittura(elemento.getNome());
+					if (sistema.getStella().getPianeta(i).getNumeroLune() >= 1) {
+						scrittura("Le lune del pianeta sono:");
+						for (Luna elemento : sistema.getStella().getPianeta(i).getLuna()) {
+							scrittura("*" + elemento.getNome());
+						}
+					}else {
+						scrittura("Il pianeta non ha lune");
 					}
-					break;
+					return;
 				}else {
-					for(int c = 0; c == sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
+					for(int c = 0; c < sistema.getStella().getPianeta(i).getNumeroLune(); c++) {
 						if(nomeCorpo.equals(sistema.getStella().getPianeta(i).getLuna(c).getNome())) {
 							scrittura(nomeCorpo + " è una luna, ecco i suoi dati: ");
 							stampaDati(sistema.getStella().getPianeta(i).getLuna(c), false);
 							scrittura("il percorso per trovare la luna è: ");
-							scrittura(sistema.getStella().getNome() + ">" + sistema.getStella().getPianeta(i) + ">" + sistema.getStella().getPianeta(i).getLuna(c).getNome());
-							break;
+							scrittura(sistema.getStella().getNome() + ">" + sistema.getStella().getPianeta(i).getNome() + ">" + sistema.getStella().getPianeta(i).getLuna(c).getNome());
+							return;
 						}						
 					}
 				}			

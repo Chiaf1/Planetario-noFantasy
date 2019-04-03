@@ -55,13 +55,13 @@ public abstract class CorpoCeleste {
 					int num = Integer.valueOf(newId.substring(2, 5));
 					num++;
 					if(num<10) {
-						newId = newId.substring(0, 1) + "000" + Integer.toString(num);
+						newId = newId.substring(0, 2) + "000" + Integer.toString(num);
 					} else if (num<100) {
-						newId = newId.substring(0, 1) + "00" + Integer.toString(num);
+						newId = newId.substring(0, 2) + "00" + Integer.toString(num);
 					}else if (num<1000) {
-						newId = newId.substring(0, 1) + "0" + Integer.toString(num);
+						newId = newId.substring(0, 2) + "0" + Integer.toString(num);
 					}else {
-						newId = newId.substring(0, 1) + Integer.toString(num);				
+						newId = newId.substring(0, 2) + Integer.toString(num);				
 					}
 					
 				}else {
