@@ -165,13 +165,13 @@ public class Sistema {
 		}
 			
 		//calcolo della rotta + la distanza percorsa
-		if (idCorpo1 == "0A0000" || idCorpo2 == "0A0000") {
+		if (idCorpo1.equals("0A0000") || idCorpo2.equals("0A0000")) {
 			//se non ho trovato entrambe i corpi ritorno il messaggio seguente
 			risultato.append("mi spiace ma non è stato possibile calcolare la rotta");
 			return risultato;
 		}else {
 			
-			if (idCorpo1 != idCorpo2) {
+			if (!idCorpo1.equals(idCorpo2)) {
 				//nel caso in cui i due corpi esistono e sono diversi stampo la rotta e la distanza a seconda della loro combinazione
 				risultato.append("La rotta da seguire per andare da " + nomeCorpo1 + " a " + nomeCorpo2 + " è:");
 				switch (idCorpo1.substring(0, 1)) {
