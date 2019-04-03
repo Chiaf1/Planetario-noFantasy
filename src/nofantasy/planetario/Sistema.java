@@ -190,8 +190,8 @@ public class Sistema {
 					}				
 					break;
 				case 'P':
-					switch(idCorpo2.substring(0, 1)) {
-					case "S"://caso pianeta>stella
+					switch(idCorpo2.substring(0, 1).toCharArray()[0]) {
+					case 'S'://caso pianeta>stella
 						risultato.append(stella.getPianeta(indicePianeta1).getNome() + " > " + stella.getNome());
 						distanza = stella.getPianeta(indicePianeta1).getCoordinate().distanza(stella.getCoordinate());
 						risultato.append("la distanza da percorrere è: " + distanza);
