@@ -8,6 +8,7 @@ public abstract class CorpoCeleste {
 	private double angolo0;
 	private Coordinate coordinate;
 	
+	//costruttore per luna e pianeta
 	public CorpoCeleste(String nome, double massa, double angolo0, double raggioOrbita) {
 		this.nome = nome;
 		this.massa = massa;
@@ -15,6 +16,7 @@ public abstract class CorpoCeleste {
 		this.raggioOrbita = raggioOrbita;	
 	}
 	
+	//costruttore per la stella
 	public CorpoCeleste(String nome, double massa) {
 		
 		this.nome = nome;
@@ -49,8 +51,8 @@ public abstract class CorpoCeleste {
 	}
 	
 	public String calcolaId(String newId) {
-		//creazione ID
 				
+				//calcolo parte numerica dell'id
 				if(!"9999".equals(newId.substring(2, 5))) {
 					int num = Integer.valueOf(newId.substring(2, 5));
 					num++;
@@ -65,6 +67,7 @@ public abstract class CorpoCeleste {
 					}
 					
 				}else {
+					//calcolo parte ""alfabetia??"" dell'id
 					char c = newId.charAt(1);
 					c++;
 					

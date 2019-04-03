@@ -9,6 +9,7 @@ public class Stella extends CorpoCeleste{
 	private static String newId = "SA0000";
 	private ArrayList<Pianeta> pianeti = new ArrayList<Pianeta>();
 	
+	//creazione stella vuota
 	public Stella() {
 		super("",0.0);
 	}
@@ -27,6 +28,7 @@ public class Stella extends CorpoCeleste{
 	}
 	
 	public boolean aggiungiPianeta(Pianeta newPianeta) {
+		//controllo eventuali conflitti
 		if (super.getNome().equals(newPianeta.getNome())) {
 			return false;
 		}else {

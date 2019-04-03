@@ -28,8 +28,7 @@ public class Coordinate {
 		this.y = y;
 	}
 	
-	public double distanza(Coordinate inC) {
-					
+	public double distanza(Coordinate inC) {	
 		return Math.hypot(x-inC.getX(), y-inC.getY());
 	}
 

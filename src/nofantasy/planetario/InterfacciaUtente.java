@@ -18,6 +18,7 @@ public class InterfacciaUtente {
 		sistema = new Sistema(stella);
 	}
 	
+	//gestione delle azioni consentite del programma
 	public boolean azione() {
 		switch(letturaChar("\nMenu\n"
 				+ "_s: ricerca corpo\n"
@@ -169,6 +170,7 @@ public class InterfacciaUtente {
 		raggioOrbita = letturaDouble("Raggio orbitale: ");
 		angolo0 = letturaDouble("Angolo di partenza: ");
 		
+		//controllo eventuali conflitti
 		if (sistema.getStella().getNome().equals(nomeLuna)) {
 			scrittura("Il nome inserito esiste già. Cambiarlo tu devi.");
 			return;
@@ -191,6 +193,7 @@ public class InterfacciaUtente {
 			}
 		}
 		
+		//ricerca del pianeta + aggiunta della luna e controllo sulla riuscita dell'operazione
 		for (int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
 			if (nomePianeta.equals(sistema.getStella().getPianeta(i).getNome())) {
 				Luna newLuna = new Luna(nomeLuna, massa, angolo0, raggioOrbita, sistema.getStella().getPianeta(i));
@@ -211,6 +214,8 @@ public class InterfacciaUtente {
 		boolean b = false;
 		scrittura("Per distruggere una luna bisogna sapere il nome.");
 		nomeLuna = letturaString("\nLuna: ");
+		
+		//controllo esistenza luna + distruzione luna e controllo riuscita operazione
 		for(int i = 0; i < sistema.getStella().getNumeroPianeti(); i++) {
 			if(sistema.getStella().getPianeta(i).distruggiLuna(nomeLuna)) {
 				b = true;
@@ -231,6 +236,7 @@ public class InterfacciaUtente {
 		double angolo0 = letturaDouble("Inserire l'angolo di partenza: ");
 		double raggioOrbita = letturaDouble("Inserire il raggio dell'orbita: ");
 		
+		//aggiunta pianeta + controllo operazione riuscita
 		newPianeta = new Pianeta(nome, massa, angolo0, raggioOrbita);
 		if (!(sistema.getStella().aggiungiPianeta(newPianeta))){
 			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due: \n"
@@ -242,6 +248,7 @@ public class InterfacciaUtente {
 	private void distruggiPianeta() {
 		String pianetaDaDistruggere = letturaString("Per distruggere un pianeta digitare il nome: ");
 		
+		//distruzione pianeta + controllo operazione riuscita
 		if(!(sistema.getStella().distruggiPianeta(pianetaDaDistruggere))) {
 			scrittura("Il pianeta da distruggere è già stato distrutto o non è mai esistito");
 		}
@@ -297,6 +304,7 @@ public class InterfacciaUtente {
 		System.out.println(ms);
 	}
 	
+	//stampo tutti i dati del corpo e distinguo il caso stella da pianeta/luna
 	private void stampaDati(CorpoCeleste corpo, boolean isStella) {
 		scrittura("_nome: " + corpo.getNome());
 		scrittura("_massa: " + corpo.getMassa());

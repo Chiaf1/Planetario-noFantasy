@@ -9,6 +9,7 @@ public class Pianeta extends CorpoCeleste{
 	private static String newId = "PA0000";
 	private ArrayList<Luna> lune = new ArrayList<Luna>();
 	
+	//creazione pianeta vuoto
 	public Pianeta() {
 		super("",0.0,0.0,0.0);
 	}
@@ -31,14 +32,12 @@ public class Pianeta extends CorpoCeleste{
 	}
 	
 	public boolean aggiungiLuna(Luna newLuna) {
-				
 		if (lune.size() <= N_MAX_LUNE) {
 			lune.add(newLuna);
 			return true;
 		}else {
 			return false;
 		}
-		
 	}
 	
 	public ArrayList<Luna> getLuna(){

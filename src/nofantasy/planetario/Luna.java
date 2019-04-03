@@ -5,6 +5,7 @@ public class Luna extends CorpoCeleste{
 	private String id;
 	private static String newId = "LA0000";
 	
+	//creazione luna vuota
 	public Luna() {
 		super("",0.0,0.0,0.0);
 	}
