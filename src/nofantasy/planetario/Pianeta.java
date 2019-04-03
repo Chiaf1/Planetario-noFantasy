@@ -10,12 +10,12 @@ public class Pianeta extends CorpoCeleste{
 	private ArrayList<Luna> lune = new ArrayList<Luna>();
 	
 	public Pianeta() {
-		super("",0.0,0.0,0.0,0.0);
+		super("",0.0,0.0,0.0);
 	}
 	
-	public Pianeta(String nome, double massa, double periodo, double angolo0, double raggioOrbita) {
+	public Pianeta(String nome, double massa, double angolo0, double raggioOrbita) {
 		
-		super(nome, massa, periodo, angolo0, raggioOrbita);
+		super(nome, massa, angolo0, raggioOrbita);
 		
 		//creazione id
 		id = newId;

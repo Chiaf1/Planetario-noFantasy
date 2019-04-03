@@ -27,7 +27,7 @@ public class InterfacciaUtente {
 				+ "_c: calcolo della rotta\n"
 				+ "_e: chiudi il programma\n"
 				+ "_m: per ricevere i dati sul centro di massa\n"
-				+ "_n: per avere i dati sulle collisioni\n")) {
+				+ "_n: per avere i dati sulle collisioni")) {
 		case 's':
 			ricercaCorpo(letturaString("Inserire il nome del corpo da cercare: "));
 			break;
@@ -149,12 +149,11 @@ public class InterfacciaUtente {
 		nomePianeta = letturaString("Pianeta: ");
 		massa = letturaDouble("Massa: ");
 		raggioOrbita = letturaDouble("Raggio orbitale: ");
-		periodo = letturaDouble("Periodo orbitale: ");
 		angolo0 = letturaDouble("Angolo di partenza: ");
 
 		for (int i = 0; i<sistema.getStella().getNumeroPianeti(); i++) {
 			if (nomePianeta.equals(sistema.getStella().getPianeta(i).getNome())) {
-				Luna newLuna = new Luna(nomeLuna, massa, periodo, angolo0, raggioOrbita, sistema.getStella().getPianeta(i));
+				Luna newLuna = new Luna(nomeLuna, massa, angolo0, raggioOrbita, sistema.getStella().getPianeta(i));
 				if (!(sistema.getStella().getPianeta(nomePianeta).aggiungiLuna(newLuna))) {
 					scrittura("Hai inserito troppe lune o il pianeta ne possiede già un'altra con questo raggio orbitale");
 				}
@@ -189,11 +188,10 @@ public class InterfacciaUtente {
 		
 		String nome = letturaString("Inserire il nome: ");
 		double massa = letturaDouble("Inserire la massa: ");
-		double periodo = letturaDouble("Inserire il periodo:");
 		double angolo0 = letturaDouble("Inserire l'angolo di partenza: ");
 		double raggioOrbita = letturaDouble("Inserire il raggio dell'orbita: ");
 		
-		newPianeta = new Pianeta(nome, massa, periodo, angolo0, raggioOrbita);
+		newPianeta = new Pianeta(nome, massa, angolo0, raggioOrbita);
 		if (!(sistema.getStella().aggiungiPianeta(newPianeta))){
 			scrittura("Non è stato possibile aggiungere il pianeta, i motivi possono essere due: \n"
 					+ "_è stato raggiunto il limite di spazio per i pianeti\n"

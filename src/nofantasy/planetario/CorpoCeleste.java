@@ -5,14 +5,12 @@ public abstract class CorpoCeleste {
 	private String nome;
 	private double massa;
 	private double raggioOrbita;
-	private double periodo;
 	private double angolo0;
 	private Coordinate coordinate;
 	
-	public CorpoCeleste(String nome, double massa, double periodo, double angolo0, double raggioOrbita) {
+	public CorpoCeleste(String nome, double massa, double angolo0, double raggioOrbita) {
 		this.nome = nome;
 		this.massa = massa;
-		this.periodo = periodo;
 		this.angolo0 = angolo0;
 		this.raggioOrbita = raggioOrbita;	
 	}
@@ -38,10 +36,6 @@ public abstract class CorpoCeleste {
 		return raggioOrbita;
 	}
 
-	public double getPeriodo() {
-		return periodo;
-	}
-
 	public double getAngolo0() {
 		return angolo0;
 	}
@@ -57,7 +51,7 @@ public abstract class CorpoCeleste {
 	public String calcolaId(String newId) {
 		//creazione ID
 				
-				if("9999" != newId.substring(2, 5)) {
+				if(!"9999".equals(newId.substring(2, 5))) {
 					int num = Integer.valueOf(newId.substring(2, 5));
 					num++;
 					if(num<10) {

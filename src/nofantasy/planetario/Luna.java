@@ -6,12 +6,12 @@ public class Luna extends CorpoCeleste{
 	private static String newId = "LA0000";
 	
 	public Luna() {
-		super("",0.0,0.0,0.0,0.0);
+		super("",0.0,0.0,0.0);
 	}
 	
-	public Luna(String nome, double massa, double periodo, double angolo0, double raggioOrbita, Pianeta pianeta) {
+	public Luna(String nome, double massa, double angolo0, double raggioOrbita, Pianeta pianeta) {
 		
-		super(nome, massa, periodo, angolo0, raggioOrbita);
+		super(nome, massa, angolo0, raggioOrbita);
 		
 		//creazione id
 		id = newId;
