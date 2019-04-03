@@ -142,7 +142,7 @@ public class InterfacciaUtente {
 	private void aggiungiLuna() {
 		String nomeLuna, nomePianeta;
 		boolean isTrovato = false;
-		double massa, raggioOrbita, periodo, angolo0;
+		double massa, raggioOrbita, angolo0;
 		scrittura("Per aggiungere una luna devi specificare un pianeta di appartenenza.\n"
 				+ "Dopo di che devi inserire le specifichedella luna.\n");
 		nomeLuna = letturaString("Luna: ");
@@ -262,7 +262,6 @@ public class InterfacciaUtente {
 		scrittura("_massa: " + corpo.getMassa());
 		if(!isStella) {
 			scrittura("_raggio dell' orbita: " + corpo.getRaggioOrbita());
-			scrittura("_periodo: " + corpo.getPeriodo());
 			scrittura("_angolo di partenza: " + corpo.getAngolo0());
 		}
 		scrittura("_coordinate: (" + corpo.getCoordinate().getX() + "," + corpo.getCoordinate().getY() + ")");		
